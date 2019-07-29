@@ -8,7 +8,6 @@ class RenderOrder(Enum):
     STAIRS = auto()
     ITEM = auto()
     ACTOR = auto()
-    
 
 def get_names_under_mouse(mouse, entities, fov_map):
     (x, y) = (mouse.cx, mouse.cy)
@@ -53,7 +52,7 @@ def render_all(con, panel, entities, player, game_map, fov_map, fov_recompute, m
                     if wall:
                         libtcod.console_put_char_ex(con, x, y, '#', colors.get('dgray'), colors.get('black'))
                     else:
-                        libtcod.console_put_char_ex(con, x, y, '+', colors.get('dgray'), colors.get('black'))
+                        libtcod.console_put_char_ex(con, x, y, '+', colors.get('black'), colors.get('black'))
 
     entities_in_render_order = sorted(entities, key=lambda x: x.render_order.value)
 
