@@ -43,9 +43,30 @@ def get_constants():
     colors = {
         'dark_wall': libtcod.Color(0, 0, 100),
         'dark_ground': libtcod.Color(50, 50, 150),
-        'light_wall': libtcod.Color(130, 110, 50),
-        'light_ground': libtcod.Color(200, 180, 50)
+        'dark_ground_bg': libtcod.Color(38, 38, 38),
+        'light_wall': libtcod.Color(188, 188, 188),
+        'light_ground': libtcod.Color(111, 111, 111),
+        'light_ground_bg': libtcod.Color(38, 38, 38),
+        'black': libtcod.Color(25, 25, 25),
+        'blue': libtcod.Color(0, 99, 177),
+        'green': libtcod.Color(85, 153, 85),
+        'cyan': libtcod.Color(77, 158, 161),
+        'red': libtcod.Color(187, 34, 34),
+        'magenta': libtcod.Color(170, 51, 119),
+        'brown': libtcod.Color(140, 117, 100),
+        'lgray': libtcod.Color(157, 174, 178),
+        'dgray': libtcod.Color(91, 112, 117),
+        'lblue': libtcod.Color(48, 165, 255),
+        'lgreen': libtcod.Color(153, 238, 119),
+        'lcyan': libtcod.Color(128, 212, 215),
+        'lred': libtcod.Color(246, 114, 128),
+        'lmagenta': libtcod.Color(255, 136, 187),
+        'yellow': libtcod.Color(255, 255, 102),
+        'white': libtcod.Color(255, 250, 232)
+        
     }
+    
+    
     
     constants = {
         'window_title': window_title,
@@ -77,7 +98,7 @@ def get_game_variables(constants):
     inventory_component = Inventory(26)
     level_component = Level()
     equipment_component = Equipment()
-    player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR,
+    player = Entity(0, 0, '@', libtcod.Color(255, 250, 232), 'Player', blocks=True, render_order=RenderOrder.ACTOR,
                     fighter=fighter_component, inventory=inventory_component, level=level_component,
                     equipment=equipment_component)
     entities = [player]
