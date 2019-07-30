@@ -24,6 +24,8 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
     
     targeting_item = None
 
+    colors = constants['colors']
+
     while not libtcod.console_is_window_closed():
         libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS | libtcod.EVENT_MOUSE, key, mouse)
 
@@ -33,7 +35,7 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 
         render_all(con, panel, entities, player, game_map, fov_map, fov_recompute, message_log,
                    constants['screen_width'], constants['screen_height'], constants['bar_width'],
-                   constants['panel_height'], constants['panel_y'], mouse, constants['colors'], game_state)
+                   constants['panel_height'], constants['panel_y'], mouse, colors, game_state)
 
         fov_recompute = False
 
@@ -87,7 +89,7 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
                     player_turn_results.extend(pickup_results)
                     break
             else:
-                message_log.add_message(Message('There is nothing here to pick up.', libtcod.yellow))
+                message_log.add_message(Message('There is nothing here to pick up.', colors.yellow()))
 
         if show_inventory:
             previous_game_state = game_state
@@ -116,7 +118,7 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 
                     break
             else:
-                message_log.add_message(Message('There are no stairs here.', libtcod.yellow))        
+                message_log.add_message(Message('There are no stairs here.', colors.yellow()))        
         if level_up:
             if level_up == 'hp':
                 player.fighter.base_max_hp += 20
@@ -170,9 +172,9 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 
             if dead_entity:
                 if dead_entity == player:
-                    message, game_state = kill_player(dead_entity)
+                    message, game_state = kill_player(dead_entity, colors.dred())
                 else:
-                    message = kill_monster(dead_entity)
+                    message = kill_monster(dead_entity, colors.dred(), colors.orange())
 
                 message_log.add_message(message)
 
@@ -196,10 +198,10 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
                     dequipped = equip_result.get('dequipped')
 
                     if equipped:
-                        message_log.add_message(Message('You equipped the {0}'.format(equipped.name)))
+                        message_log.add_message(Message('You equipped the {0}'.format(equipped.name), colors.white()))
 
                     if dequipped:
-                        message_log.add_message(Message('You dequipped the {0}'.format(dequipped.name)))
+                        message_log.add_message(Message('You dequipped the {0}'.format(dequipped.name), colors.white()))
 
                 game_state = GameStates.ENEMY_TURN
             
@@ -214,11 +216,11 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
             if targeting_cancelled:
                 game_state = previous_game_state
 
-                message_log.add_message(Message('Targeting cancelled'))
+                message_log.add_message(Message('Targeting cancelled', colors.white()))
 
             if xp:
                 leveled_up = player.level.add_xp(xp)
-                message_log.add_message(Message('You gain {0} experience points.'.format(xp)))
+                message_log.add_message(Message('You gain {0} experience points.'.format(xp), colors.white()))
 
                 if leveled_up:
                     previous_game_state = game_state
@@ -238,9 +240,9 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 
                         if dead_entity:
                             if dead_entity == player:
-                                message, game_state = kill_player(dead_entity)
+                                message, game_state = kill_player(dead_entity, colors.dred())
                             else:
-                                message = kill_monster(dead_entity)
+                                message = kill_monster(dead_entity, colors.dred())
 
                             message_log.add_message(message)
 
@@ -256,9 +258,8 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 def main():
     constants = get_constants()
 
-    libtcod.console_set_custom_font('arial10x10.png',
-                                    libtcod.FONT_TYPE_GREYSCALE |
-                                    libtcod.FONT_LAYOUT_TCOD)
+    libtcod.console_set_custom_font('taffer.png',
+                                    libtcod.FONT_LAYOUT_ASCII_INROW)
 
     libtcod.console_init_root(constants['screen_width'],
                               constants['screen_height'],

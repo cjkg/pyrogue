@@ -1,5 +1,3 @@
-import tcod as libtcod
-
 from components.equipment import Equipment
 from components.equippable import Equippable
 from components.fighter import Fighter
@@ -10,6 +8,7 @@ from equipment_slots import EquipmentSlots
 from game_messages import MessageLog
 from game_states import GameStates
 from map_objects.game_map import GameMap
+from palette import Palette
 from render_functions import RenderOrder
 
 def get_constants():
@@ -40,12 +39,8 @@ def get_constants():
     max_monsters_per_room = 3
     max_items_per_room = 2
 
-    colors = {
-        'dark_wall': libtcod.Color(0, 0, 100),
-        'dark_ground': libtcod.Color(50, 50, 150),
-        'light_wall': libtcod.Color(130, 110, 50),
-        'light_ground': libtcod.Color(200, 180, 50)
-    }
+    colors = Palette()
+    
     
     constants = {
         'window_title': window_title,
@@ -77,13 +72,13 @@ def get_game_variables(constants):
     inventory_component = Inventory(26)
     level_component = Level()
     equipment_component = Equipment()
-    player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR,
+    player = Entity(0, 0, '@', constants['colors'].white(), 'Player', blocks=True, render_order=RenderOrder.ACTOR,
                     fighter=fighter_component, inventory=inventory_component, level=level_component,
                     equipment=equipment_component)
     entities = [player]
     
     equippable_component = Equippable(EquipmentSlots.MAIN_HAND, power_bonus=2)
-    dagger = Entity(0, 0, '-', libtcod.sky, 'Dagger', equippable=equippable_component)
+    dagger = Entity(0, 0, '-', constants['colors'].lblue(), 'Dagger', equippable=equippable_component)
     player.inventory.add_item(dagger)
     player.equipment.toggle_equip(dagger)
 
