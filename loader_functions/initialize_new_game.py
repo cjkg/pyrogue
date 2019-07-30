@@ -1,5 +1,3 @@
-import tcod as libtcod
-
 from components.equipment import Equipment
 from components.equippable import Equippable
 from components.fighter import Fighter
@@ -10,6 +8,7 @@ from equipment_slots import EquipmentSlots
 from game_messages import MessageLog
 from game_states import GameStates
 from map_objects.game_map import GameMap
+from palette import Palette
 from render_functions import RenderOrder
 
 def get_constants():
@@ -40,32 +39,7 @@ def get_constants():
     max_monsters_per_room = 3
     max_items_per_room = 2
 
-    colors = {
-        'dark_wall': libtcod.Color(0, 0, 100),
-        'dark_ground': libtcod.Color(50, 50, 150),
-        'dark_ground_bg': libtcod.Color(38, 38, 38),
-        'light_wall': libtcod.Color(188, 188, 188),
-        'light_ground': libtcod.Color(111, 111, 111),
-        'light_ground_bg': libtcod.Color(38, 38, 38),
-        'black': libtcod.Color(25, 25, 25),
-        'blue': libtcod.Color(0, 99, 177),
-        'green': libtcod.Color(85, 153, 85),
-        'cyan': libtcod.Color(77, 158, 161),
-        'red': libtcod.Color(187, 34, 34),
-        'magenta': libtcod.Color(170, 51, 119),
-        'brown': libtcod.Color(140, 117, 100),
-        'lgray': libtcod.Color(157, 174, 178),
-        'dgray': libtcod.Color(91, 112, 117),
-        'lblue': libtcod.Color(48, 165, 255),
-        'lgreen': libtcod.Color(153, 238, 119),
-        'lcyan': libtcod.Color(128, 212, 215),
-        'lred': libtcod.Color(246, 114, 128),
-        'lmagenta': libtcod.Color(255, 136, 187),
-        'yellow': libtcod.Color(255, 255, 102),
-        'white': libtcod.Color(255, 250, 232)
-        
-    }
-    
+    colors = Palette()
     
     
     constants = {
@@ -98,13 +72,13 @@ def get_game_variables(constants):
     inventory_component = Inventory(26)
     level_component = Level()
     equipment_component = Equipment()
-    player = Entity(0, 0, '@', libtcod.Color(255, 250, 232), 'Player', blocks=True, render_order=RenderOrder.ACTOR,
+    player = Entity(0, 0, '@', constants['colors'].white(), 'Player', blocks=True, render_order=RenderOrder.ACTOR,
                     fighter=fighter_component, inventory=inventory_component, level=level_component,
                     equipment=equipment_component)
     entities = [player]
     
     equippable_component = Equippable(EquipmentSlots.MAIN_HAND, power_bonus=2)
-    dagger = Entity(0, 0, '-', libtcod.sky, 'Dagger', equippable=equippable_component)
+    dagger = Entity(0, 0, '-', constants['colors'].lblue(), 'Dagger', equippable=equippable_component)
     player.inventory.add_item(dagger)
     player.equipment.toggle_equip(dagger)
 
