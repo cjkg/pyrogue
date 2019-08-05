@@ -6,10 +6,10 @@ def kill_player(player, dead_color):
     player.char = '@'
     player.color = dead_color
 
-    return Message('You died!', dead_color), GameStates.PLAYER_DEAD
+    return Message('You are dead.', dead_color), GameStates.PLAYER_DEAD
 
 def kill_monster(monster, dead_color, slay_color):
-    death_message = Message('{0} is dead!'.format(monster.name.capitalize()), slay_color)
+    death_message = Message('{0} is slain!'.format(monster.name.capitalize()), slay_color)
 
     monster.char = '%'
     monster.color = dead_color

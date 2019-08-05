@@ -58,7 +58,7 @@ def main_menu(con, background_image, screen_width, screen_height):
 
 def level_up_menu(con, header, player, menu_width, screen_width, screen_height):
     options = ['Constitution (+20 HP, from {0})'.format(player.fighter.max_hp),
-               'Strength (+1 attack, from {0})'.format(player.fighter.base_power),
+               'Strength (+1 attack, from {0})'.format(player.fighter.strength),
                'Agility (+1 defense, from {0})'.format(player.fighter.defense)]
 
     menu(con, header, options, menu_width, screen_width, screen_height)
@@ -67,7 +67,6 @@ def character_screen(player, character_screen_width, character_screen_height, sc
     window = libtcod.console_new(character_screen_width, character_screen_height)
 
     libtcod.console_set_default_foreground(window, libtcod.white)
-    
     
     libtcod.console_print_rect_ex(window, 0, 1, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
                                   libtcod.LEFT, 'Character Information')
@@ -80,7 +79,7 @@ def character_screen(player, character_screen_width, character_screen_height, sc
     libtcod.console_print_rect_ex(window, 0, 7, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
                                   libtcod.LEFT, 'Maximum HP: {0}'.format(player.fighter.max_hp))
     libtcod.console_print_rect_ex(window, 0, 8, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
-                                  libtcod.LEFT, 'Attack: {0}'.format(player.fighter.power))
+                                  libtcod.LEFT, 'Attack: {0}'.format(player.fighter.main_hand_damage_msg))
     libtcod.console_print_rect_ex(window, 0, 9, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
                                   libtcod.LEFT, 'Defense: {0}'.format(player.fighter.defense))
     libtcod.console_print_rect_ex(window, 0, 11, character_screen_width, character_screen_height, libtcod.BKGND_NONE,

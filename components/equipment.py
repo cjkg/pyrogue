@@ -18,12 +18,61 @@ class Equipment:
     def main_hand_weapon_type(self):
         if self.main_hand and self.main_hand.equippable:
             return self.main_hand.equippable.weapon_type
+    
+    @property
+    def main_hand_weapon_damage_bonus(self):
+        bonus = 0
         
+        if self.main_hand and self.main_hand.equippable:
+            bonus += self.main_hand.equippable.damage_bonus
+           
+        if self.off_hand and self.off_hand.equippable:
+            bonus += self.off_hand.equippable.damage_bonus
+            
+        if self.head and self.head.equippable:
+            bonus += self.head.equippable.damage_bonus
+        
+        if self.chest and self.chest.equippable:
+            bonus += self.chest.equippable.damage_bonus
+            
+        if self.gloves and self.gloves.equippable:
+            bonus += self.gloves.equippable.damage_bonus
+        
+        if self.legs and self.legs.equippable:
+            bonus += self.legs.equippable.damage_bonus
+            
+        if self.feet and self.feet.equippable:
+            bonus += self.feet.equippable.damage_bonus
+            
+        if self.left_ring and self.left_ring.equippable:
+            bonus += self.left_ring.equippable.damage_bonus
+            
+        if self.right_ring and self.right_ring.equippable:
+            bonus += self.right_ring.equippable.damage_bonus
+
+
+        return bonus
+
     @property
     def off_hand_weapon_type(self):
-        if self.main_hand and self.off_hand.equippable:
+        if self.off_hand and self.off_hand.equippable:
             return self.off_hand.equippable.weapon_type
+    
+    @property
+    def off_hand_weapon_damage_dice_count(self):
+        if self.off_hand and self.off_hand.equippable:
+            return self.off_hand.equippable.damage_dice_count
+            
+    @property
+    def off_hand_weapon_damage_face(self):
+        if self.off_hand and self.off_hand.equippable:
+            return self.off_hand.equippable.damage_die_face
         
+    @property
+    def off_hand_weapon_damage_bonus(self):
+        if self.off_hand and self.off_hand.equippable:
+            return self.off_hand.equippable.damage_bonus
+
     @property
     def max_hp_bonus(self):
         bonus = 0
@@ -55,18 +104,6 @@ class Equipment:
         if self.right_ring and self.right_ring.equippable:
             bonus += self.right_ring.equippable.max_hp_bonus
 
-        return bonus
-
-    @property
-    def power_bonus(self):
-        bonus = 0
-
-        if self.main_hand and self.main_hand.equippable:
-            bonus += self.main_hand.equippable.power_bonus
-
-        if self.off_hand and self.off_hand.equippable:
-            bonus += self.off_hand.equippable.power_bonus
-        
         return bonus
 
     @property
@@ -134,19 +171,35 @@ class Equipment:
             bonus += self.right_ring.equippable.attack_die_bonus
 
         return bonus
-    """
+
     @property
-    def damage_die_bonus(self):
+    def damage_bonus(self):
         bonus = 0
 
-        if self.main_hand and self.main_hand.equippable:
-            bonus += self.main_hand.equippable.damage_die_bonus
-
-        if self.off_hand and self.off_hand.equippable:
-            bonus += self.off_hand.equippable.damage_die_bonus
+        if self.head and self.head.equippable:
+            bonus += self.head.equippable.damage_bonus
+        
+        if self.chest and self.chest.equippable:
+            bonus += self.chest.equippable.damage_bonus
+            
+        if self.gloves and self.gloves.equippable:
+            bonus += self.gloves.equippable.damage_bonus
+        
+        if self.legs and self.legs.equippable:
+            bonus += self.legs.equippable.damage_bonus
+            
+        if self.feet and self.feet.equippable:
+            bonus += self.feet.equippable.damage_bonus
+            
+        if self.left_ring and self.left_ring.equippable:
+            bonus += self.left_ring.equippable.damage_bonus
+            
+        if self.right_ring and self.right_ring.equippable:
+            bonus += self.right_ring.equippable.damage_bonus
+        
 
         return bonus
-    """
+
     @property
     def str_bonus(self):
         bonus = 0
