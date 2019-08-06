@@ -93,8 +93,6 @@ def character_screen(player, character_screen_width, character_screen_height, sc
     libtcod.console_print_rect_ex(window, 0, 15, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
                                   libtcod.LEFT, 'END: {0} ({1})'.format(player.fighter.endurance, player.fighter.end_mod))
     libtcod.console_print_rect_ex(window, 0, 16, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
-                                  libtcod.LEFT, 'WIL: {0} ({1})'.format(player.fighter.will, player.fighter.will_mod))
-    libtcod.console_print_rect_ex(window, 0, 17, character_screen_width, character_screen_height, libtcod.BKGND_NONE,
                                   libtcod.LEFT, 'CHA: {0} ({1})'.format(player.fighter.charisma, player.fighter.cha_mod))
     x = screen_width // 2 - character_screen_width // 2
     y = screen_height // 2 - character_screen_height // 2

@@ -4,15 +4,14 @@ import tcod as libtcod
 from game_messages import Message
 
 class Fighter:
-    def __init__(self, hp, defense, strength, agility, intelligence,
-                 will, charisma, perception, endurance,
+    def __init__(self, hp, defense, strength=1, agility=1, intelligence=1,
+                 charisma=1, perception=1, endurance=1,
                  attack_die={"dice_count":1,"die_faces":20, "die_bonus":0}, xp=0):
         self.base_max_hp = hp
         self.hp = hp
         self.strength = strength
         self.agility = agility
         self.intelligence = intelligence
-        self.will = will
         self.charisma = charisma
         self.perception = perception
         self.endurance = endurance
@@ -109,15 +108,6 @@ class Fighter:
         return self.find_mod(self.intelligence + bonus)
 
     @property
-    def will_mod(self):
-        bonus = 0
-
-        if self.owner and self.owner.equipment:
-            bonus += self.owner.equipment.will_bonus
-
-        return self.find_mod(self.will + bonus)
-
-    @property
     def cha_mod(self):
         bonus = 0
 
@@ -145,32 +135,22 @@ class Fighter:
         return self.find_mod(self.endurance + bonus)
 
     def find_mod(self, base_score):
-        if base_score <= 3:
+        if base_score == 1:
             return -3
-        elif base_score in {4, 5, 6}:
+        elif base_score == 2:
             return -2
-        elif base_score in {7, 8}:
+        elif base_score == 3:
             return -1
-        elif base_score in {9, 10, 11, 12}:
+        elif base_score in {4, 5, 6}:
             return 0
-        elif base_score in {13, 14}:
+        elif base_score == 7:
             return 1
-        elif base_score in {15, 16, 17}:
+        elif base_score == 8:
             return 2
-        elif base_score == 18:
+        elif base_score == 9:
             return 3
-        elif base_score in {19, 20}:
+        elif base_score == 10:
             return 4
-        elif base_score == 21:
-            return 5
-        elif base_score == 22:
-            return 6
-        elif base_score == 23:
-            return 7
-        elif base_score == 24:
-            return 8
-        elif base_score >= 25:
-            return 9
         else:
             return 0
 

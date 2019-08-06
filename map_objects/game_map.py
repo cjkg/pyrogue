@@ -73,12 +73,12 @@ class GameMap:
                 monster_choice = random_choice_from_dict(monster_chances)
                 
                 if monster_choice == 'orc':
-                    fighter_component = Fighter(hp=4, defense=12, strength=13, agility=12, intelligence=7, will=7, charisma=7, perception=13, endurance=13, xp=35)
+                    fighter_component = Fighter(hp=4, defense=12, strength=6, agility=6, intelligence=2, charisma=1, perception=6, endurance=6, xp=35)
                     ai_component = BasicMonster()
                     monster = Entity(x, y, 'o', libtcod.desaturated_green, 'Orc', blocks=True,
                                      render_order=RenderOrder.ACTOR, fighter=fighter_component, ai=ai_component)
                 else:
-                    fighter_component = Fighter(hp=10, defense=15, strength=18, agility=9, intelligence=5, will=7, charisma=3, perception=10, endurance=16, xp=100)
+                    fighter_component = Fighter(hp=10, defense=15, strength=10, agility=5, intelligence=1, charisma=1, perception=7, endurance=8, xp=100)
                     ai_component = BasicMonster()
                     monster = Entity(x, y, 'T', libtcod.darker_green, 'Troll', blocks=True,
                                     render_order=RenderOrder.ACTOR, fighter=fighter_component, ai=ai_component)
@@ -180,9 +180,5 @@ class GameMap:
         self.tiles = self.initialize_tiles()
         self.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'],
                       constants['map_width'], constants['map_height'], player, entities)
-
-        player.fighter.heal(player.fighter.max_hp // 2)
-
-        message_log.add_message(Message('You take a moment to rest, and recover your strength.', libtcod.light_violet))
 
         return entities

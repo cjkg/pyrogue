@@ -54,26 +54,6 @@ class Equipment:
         return bonus
 
     @property
-    def off_hand_weapon_type(self):
-        if self.off_hand and self.off_hand.equippable:
-            return self.off_hand.equippable.weapon_type
-    
-    @property
-    def off_hand_weapon_damage_dice_count(self):
-        if self.off_hand and self.off_hand.equippable:
-            return self.off_hand.equippable.damage_dice_count
-            
-    @property
-    def off_hand_weapon_damage_face(self):
-        if self.off_hand and self.off_hand.equippable:
-            return self.off_hand.equippable.damage_die_face
-        
-    @property
-    def off_hand_weapon_damage_bonus(self):
-        if self.off_hand and self.off_hand.equippable:
-            return self.off_hand.equippable.damage_bonus
-
-    @property
     def max_hp_bonus(self):
         bonus = 0
 
@@ -296,39 +276,6 @@ class Equipment:
             
         if self.right_ring and self.right_ring.equippable:
             bonus += self.right_ring.equippable.int_bonus
-
-        return bonus
-    
-    @property
-    def will_bonus(self):
-        bonus = 0
-        
-        if self.main_hand and self.main_hand.equippable:
-            bonus += self.main_hand.equippable.will_bonus
-
-        if self.off_hand and self.off_hand.equippable:
-            bonus += self.off_hand.equippable.will_bonus
-
-        if self.head and self.head.equippable:
-            bonus += self.head.equippable.will_bonus
-        
-        if self.chest and self.chest.equippable:
-            bonus += self.chest.equippable.will_bonus
-            
-        if self.gloves and self.gloves.equippable:
-            bonus += self.gloves.equippable.will_bonus
-        
-        if self.legs and self.legs.equippable:
-            bonus += self.legs.equippable.will_bonus
-            
-        if self.feet and self.feet.equippable:
-            bonus += self.feet.equippable.will_bonus
-            
-        if self.left_ring and self.left_ring.equippable:
-            bonus += self.left_ring.equippable.will_bonus
-            
-        if self.right_ring and self.right_ring.equippable:
-            bonus += self.right_ring.equippable.will_bonus
 
         return bonus
 

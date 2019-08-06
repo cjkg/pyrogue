@@ -3,7 +3,7 @@ class Equippable:
                  damage_bonus=0, weapon_type=None, damage_type=None, 
                  ammo_type=None, reach=None, attack_die_bonus=0, 
                  defense_bonus=0, max_hp_bonus=0, str_bonus=0, agi_bonus=0, 
-                 int_bonus=0, will_bonus=0, cha_bonus=0, per_bonus=0, 
+                 int_bonus=0, cha_bonus=0, per_bonus=0, 
                  end_bonus=0):
         self.slot = slot
         self.damage_dice_count = damage_dice_count
@@ -19,7 +19,6 @@ class Equippable:
         self.str_bonus = str_bonus
         self.agi_bonus = agi_bonus
         self.int_bonus = int_bonus
-        self.will_bonus = will_bonus
         self.cha_bonus = cha_bonus
         self.per_bonus = per_bonus
         self.end_bonus = end_bonus
