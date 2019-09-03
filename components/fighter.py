@@ -25,7 +25,8 @@ class Fighter:
             bonus = self.owner.equipment.max_hp_bonus
         else:
             bonus = 0
-
+        
+        bonus += (self.end_mod * 5)
         return self.base_max_hp + bonus
 
     @property
@@ -135,7 +136,7 @@ class Fighter:
         return self.find_mod(self.endurance + bonus)
 
     def find_mod(self, base_score):
-        if base_score == 1:
+        if base_score <= 1:
             return -3
         elif base_score == 2:
             return -2
